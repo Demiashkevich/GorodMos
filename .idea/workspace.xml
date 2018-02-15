@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e442bfee-d18b-4779-aa77-b2b09b93a1cb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dzemiashkevich/gorodmos/action/URLFormatter.class" afterPath="$PROJECT_DIR$/target/classes/com/dzemiashkevich/gorodmos/action/URLFormatter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dzemiashkevich/gorodmos/facade/Facade$1.class" afterPath="$PROJECT_DIR$/target/classes/com/dzemiashkevich/gorodmos/facade/Facade$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dzemiashkevich/gorodmos/facade/Facade.class" afterPath="$PROJECT_DIR$/target/classes/com/dzemiashkevich/gorodmos/facade/Facade.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dzemiashkevich/gorodmos/parse/IssueParser.class" afterPath="$PROJECT_DIR$/target/classes/com/dzemiashkevich/gorodmos/parse/IssueParser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dzemiashkevich/gorodmos/parse/configuration/JsoupConnecter.class" afterPath="$PROJECT_DIR$/target/classes/com/dzemiashkevich/gorodmos/parse/configuration/JsoupConnecter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GorodMos.iml" afterPath="$PROJECT_DIR$/GorodMos.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/Runner.java" afterPath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/Runner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/URLFormatter.java" afterPath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/URLFormatter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/builder/IssueEntityBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/builder/IssueEntityBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/entity/Parameter.java" afterPath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/entity/Parameter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/facade/Facade.java" afterPath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/facade/Facade.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/IssueParser.java" afterPath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/IssueParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/configuration/JsoupConnecter.java" afterPath="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/configuration/JsoupConnecter.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,7 +19,7 @@
       <file leaf-file-name="IssueParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/IssueParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="-1139">
               <caret line="26" column="30" lean-forward="true" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -44,20 +31,32 @@
       <file leaf-file-name="IssueEntityBuilder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/builder/IssueEntityBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="32" column="55" lean-forward="true" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
+            <state relative-caret-position="306">
+              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Body.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/entity/parser/Body.java">
+      <file leaf-file-name="URLFormatter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/URLFormatter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="223">
+              <caret line="15" column="66" lean-forward="true" selection-start-line="15" selection-start-column="66" selection-end-line="15" selection-end-column="66" />
               <folding>
-                <element signature="e#277#278#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IssueFilter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/IssueFilter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="24" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,7 +66,19 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/facade/Facade.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="167">
-              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+              <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExcelWriter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/ExcelWriter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,8 +89,20 @@
       <file leaf-file-name="Runner.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/Runner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="784">
-              <caret line="142" column="45" lean-forward="true" selection-start-line="142" selection-start-column="45" selection-end-line="142" selection-end-column="45" />
+            <state relative-caret-position="319">
+              <caret line="170" column="25" lean-forward="true" selection-start-line="170" selection-start-column="25" selection-end-line="170" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PaginationParser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/PaginationParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -90,21 +113,9 @@
       <file leaf-file-name="JsoupConnecter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/configuration/JsoupConnecter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
+            <state relative-caret-position="510">
               <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IssueEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/entity/IssueEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-              <folding>
-                <element signature="e#389#390#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -163,10 +174,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/Runner.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/entity/Parameter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/URLFormatter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/facade/Facade.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/builder/IssueEntityBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/configuration/JsoupConnecter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/IssueParser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/facade/Facade.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/builder/IssueEntityBuilder.java" />
       </list>
     </option>
   </component>
@@ -549,7 +560,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/facade/Facade.java</url>
-          <line>74</line>
+          <line>78</line>
           <properties />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
@@ -557,7 +568,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="112" />
+      <option name="time" value="113" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -722,48 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/ExcelWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-568">
-          <caret line="35" column="50" lean-forward="true" selection-start-line="35" selection-start-column="50" selection-end-line="35" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#688#689#0" expanded="true" />
-            <element signature="e#712#713#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/PaginationParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/IssueFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="24" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/URLFormatter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="15" column="66" lean-forward="true" selection-start-line="15" selection-start-column="66" selection-end-line="15" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.7.2/jsoup-1.7.2-sources.jar!/org/jsoup/parser/Tag.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
@@ -825,14 +794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/configuration/JsoupConnecter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/entity/IssueEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -853,18 +814,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/builder/IssueEntityBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/PaginationParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="32" column="55" lean-forward="true" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
-          <folding />
+        <state relative-caret-position="289">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/IssueParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="-1139">
           <caret line="26" column="30" lean-forward="true" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/parse/configuration/JsoupConnecter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/URLFormatter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="15" column="66" lean-forward="true" selection-start-line="15" selection-start-column="66" selection-end-line="15" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/IssueFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="24" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/builder/IssueEntityBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/action/ExcelWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -874,7 +883,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/facade/Facade.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
-          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+          <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -883,8 +892,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dzemiashkevich/gorodmos/Runner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="784">
-          <caret line="142" column="45" lean-forward="true" selection-start-line="142" selection-start-column="45" selection-end-line="142" selection-end-column="45" />
+        <state relative-caret-position="319">
+          <caret line="170" column="25" lean-forward="true" selection-start-line="170" selection-start-column="25" selection-end-line="170" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -61,7 +61,7 @@ public class IssueEntityBuilder {
       return;
     }
     final String[] regionAndDistrictArray = regionAndDistrict.split("—");
-    if (regionAndDistrict.length() != 2) {
+    if (regionAndDistrictArray.length != 2) {
       return;
     }
     final String district = regionAndDistrictArray[0];
