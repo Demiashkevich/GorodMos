@@ -9,7 +9,7 @@ import java.net.SocketTimeoutException;
 
 public final class JsoupConnecter {
 
-  private static int timeout = 1_000;
+  private static double timeout = 1_000;
 
   public static Document getDocumentByUrl(final String url) {
     Connection connect = Jsoup.connect(url);
@@ -27,22 +27,14 @@ public final class JsoupConnecter {
   private static Document getConnect(final Connection connect) {
     Document document = null;
     try {
-      document = connect.timeout(timeout).get();
+      document = connect.timeout((int)timeout).get();
     } catch (SocketTimeoutException e) {
-      timeout += 1_000;
+      timeout = Math.exp(timeout / 1_000) * 1_000;
+      System.out.println(timeout);
     } catch (IOException e) {
       e.printStackTrace();
     }
     return document;
   }
-
-  //    JBrowserDriver driver = new JBrowserDriver(
-//          Settings
-//              .builder()
-//              .timezone(Timezone.AMERICA_NEWYORK)
-//              .ajaxWait(20 * 1000)
-//              .build());
-//      driver.get(url);
-//      return driver.getPageSource();
 
 }

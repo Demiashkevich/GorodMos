@@ -7,6 +7,7 @@ import com.dzemiashkevich.gorodmos.parse.configuration.JsoupConnecter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
@@ -14,10 +15,10 @@ import java.util.List;
 
 public class IssueParser {
 
-  public List<IssueEntity> parse(final String url) {
+  public List<IssueEntity> parse(final String url, int from, int to) {
     List<IssueEntity> allIssueList = new ArrayList<>();
 
-    for(int i = 1; i < 10; i++) {
+    for(int i = from; i <= 3; i++) {
       final String currentUrl = url + i;
 
       final List<IssueEntity> issueList = this.parsePage(currentUrl);
@@ -35,7 +36,7 @@ public class IssueParser {
     Body body = this.parseBody(document);
 
     if (body.getHeaderCategoryElements().size() != body.getMessageListElements().size()) {
-      return null;
+      findBodyWithoutHeader(body);
     }
 
     final List<IssueEntity> issuePage = new ArrayList<>();
@@ -52,6 +53,32 @@ public class IssueParser {
       issuePage.add(issueBuilder.build());
     }
     return issuePage;
+  }
+
+  private void findBodyWithoutHeader(final Body body) {
+    for (int i = 0; i < body.getMessageListElements().size() - 1; i++) {
+      final Element nextElement = body.getMessageListElements().get(i).nextElementSibling();
+      if (!nextElement.hasClass("headerCategory")) {
+        body.getHeaderCategoryElements().add(i + 1, createHeaderElement());
+      }
+      if (body.getHeaderCategoryElements().size() == body.getMessageListElements().size()) {
+        return;
+      }
+    }
+
+    if (body.getHeaderCategoryElements().size() != body.getMessageListElements().size()) {
+      body.getHeaderCategoryElements().add(0, createHeaderElement());
+    }
+
+  }
+
+  private Element createHeaderElement() {
+    Element element = new Element(Tag.valueOf("div"), "");
+    element.addClass("headerCategory");
+    element.appendElement("div").addClass("green");
+    element.appendElement("div").addClass("remark");
+    element.appendElement("div").addClass("figure");
+    return element;
   }
 
   private Body parseBody(final Document document) {

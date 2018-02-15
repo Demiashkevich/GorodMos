@@ -7,6 +7,7 @@ public class Parameter {
   private int zone;
   private int distinct;
   private int year;
+  private int month;
   private LocalDate from;
   private LocalDate to;
   private int issueCode;
@@ -45,6 +46,14 @@ public class Parameter {
 
   public LocalDate getTo() {
     return to;
+  }
+
+  public int getMonth() {
+    return month;
+  }
+
+  public void setMonth(int month) {
+    this.month = month;
   }
 
   public void setTo(LocalDate to) {
