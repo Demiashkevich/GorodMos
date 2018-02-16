@@ -17,4 +17,11 @@ public final class IssueFilter {
             ).collect(Collectors.toList());
   }
 
+  public static List<IssueEntity> filterByCode(final List<IssueEntity> issueEntities, int code) {
+    if (code == 0) {
+      return issueEntities;
+    }
+    return issueEntities.stream().filter(i -> i.getIssueCode() == code).collect(Collectors.toList());
+  }
+
 }

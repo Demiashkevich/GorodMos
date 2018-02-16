@@ -37,7 +37,7 @@ public class Facade {
     }
   };
 
-  public void action(final Parameter formParameter) {
+  public List<IssueEntity> action(final Parameter formParameter) {
     Parameter urlParameter = this.parameterInit(formParameter);
     final List<IssueEntity> allResult = new ArrayList<>();
     do {
@@ -74,11 +74,9 @@ public class Facade {
 
     } while (urlParameter.getFrom().isBefore(formParameter.getTo()) || urlParameter.getFrom().isEqual(formParameter.getTo()));
 
-    List<IssueEntity> issueEntities = IssueFilter.filterByTime(allResult, formParameter.getFrom(), formParameter.getTo());
-
-    ExcelWriter excelWriter = new ExcelWriter("C:\\Users\\Demiashkevich Egor\\Desktop\\GorodMos.xlsx");
-    excelWriter.writeIssue(issueEntities);
-    System.out.println();
+    final List<IssueEntity> resultAfterFilterByTime = IssueFilter.filterByTime(allResult, formParameter.getFrom(), formParameter.getTo());
+    final List<IssueEntity> resultAfterFilterByCode = IssueFilter.filterByCode(resultAfterFilterByTime, formParameter.getIssueCode());
+    return resultAfterFilterByCode;
   }
 
   private void execute(final Parameter urlParameter, final List<IssueEntity> allResult) {

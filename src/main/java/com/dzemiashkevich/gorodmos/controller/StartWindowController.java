@@ -1,5 +1,7 @@
 package com.dzemiashkevich.gorodmos.controller;
 
+import com.dzemiashkevich.gorodmos.action.ExcelWriter;
+import com.dzemiashkevich.gorodmos.entity.IssueEntity;
 import com.dzemiashkevich.gorodmos.entity.Parameter;
 import com.dzemiashkevich.gorodmos.entity.jfx.RegionJFX;
 import com.dzemiashkevich.gorodmos.facade.Facade;
@@ -8,11 +10,19 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.stage.FileChooser;
+import javafx.util.Callback;
 
+import java.io.File;
 import java.time.LocalDate;
+import java.util.List;
 
 public class StartWindowController {
+
+    @FXML
+    private ChoiceBox<RegionJFX> issueCode;
 
     @FXML
     private DatePicker from;
@@ -35,7 +45,68 @@ public class StartWindowController {
     private int intDistinct;
 
     public void initialize() {
+        Callback<DatePicker, DateCell> dayCellFactoryFrom = dp -> new DateCell()
+        {
+            @Override
+            public void updateItem(LocalDate item, boolean empty)
+            {
+                super.updateItem(item, empty);
+
+                if(item.isBefore(LocalDate.of(2012, 1, 1)) || item.isAfter(LocalDate.now().minusDays(1)))
+                {
+                    setStyle("-fx-background-color: #ffc0cb; -fx-text-fill: darkgray;");
+                    setDisable(true);
+                }
+            }
+        };
+        from.setDayCellFactory(dayCellFactoryFrom);
+
+        Callback<DatePicker, DateCell> dayCellFactoryTo = dp -> new DateCell()
+        {
+            @Override
+            public void updateItem(LocalDate item, boolean empty)
+            {
+                super.updateItem(item, empty);
+
+                if(item.isBefore(LocalDate.of(2012, 1, 2)) || item.isAfter(LocalDate.now()))
+                {
+                    setStyle("-fx-background-color: #ffc0cb; -fx-text-fill: darkgray;");
+                    setDisable(true);
+                }
+            }
+        };
+        to.setDayCellFactory(dayCellFactoryTo);
+
+        issueCode.setItems(FXCollections.observableArrayList(
+            new RegionJFX("Все проблемы".toUpperCase(), 0),
+            new RegionJFX("Дворовые территории".toUpperCase(), 53),
+            new RegionJFX("Многоквартирные дома".toUpperCase(), 16),
+            new RegionJFX("Дороги".toUpperCase(), 20301),
+            new RegionJFX("Поликлиники".toUpperCase(),3),
+            new RegionJFX("Парки".toUpperCase(),20317),
+            new RegionJFX("Несанкционированные торговые объекты".toUpperCase(), 20168),
+            new RegionJFX("Ярмарки выходного дня".toUpperCase(), 20340),
+            new RegionJFX("Летние кафе".toUpperCase(), 20165),
+            new RegionJFX("Рекламные и информационные конструкции".toUpperCase(), 20319),
+            new RegionJFX("Общественный транспорт".toUpperCase(), 20308),
+            new RegionJFX("Остановки общественного транспорта".toUpperCase(), 20309),
+            new RegionJFX("Коммерческое строительство".toUpperCase(), 20321),
+            new RegionJFX("Стройплощадки".toUpperCase(), 20307),
+            new RegionJFX("Многофункциональные центры".toUpperCase(), 20312),
+            new RegionJFX("Билетные киоски".toUpperCase(), 20315),
+            new RegionJFX("Паркоматы".toUpperCase(), 20300),
+            new RegionJFX("Переходные переходы".toUpperCase(), 20314),
+            new RegionJFX("Общественные туалеты".toUpperCase(), 20313),
+            new RegionJFX("Объекты безвозмездного пользования".toUpperCase(), 20320),
+            new RegionJFX("Городская территория".toUpperCase(), 20332),
+            new RegionJFX("Учреждения социальной сферы".toUpperCase(), 20325),
+            new RegionJFX("Метрополитен".toUpperCase(), 20121),
+            new RegionJFX("Полиция".toUpperCase(), 20354)
+        ));
+        issueCode.getSelectionModel().select(0);
+
         zone.setItems(FXCollections.observableArrayList(
+                new RegionJFX("ВСЕ ОБЛАСТИ",0),
                 new RegionJFX("ВОСТОЧНЫЙ ОКРУГ", 1 ),
                 new RegionJFX("ЗАПАДНЫЙ ОКРУГ", 19),
                 new RegionJFX("ЗЕЛЕНОГРАДСКИЙ ОКРУГ", 131),
@@ -49,8 +120,19 @@ public class StartWindowController {
                 new RegionJFX("ЮГО-ЗАПАДНЫЙ ОКРУГ", 101),
                 new RegionJFX("ЮЖНЫЙ-ОКРУГ", 114)
         ));
+        zone.getSelectionModel().select(0);
+
+        issueCode.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                return;
+            }
+            intDistinct = newValue.getCode();
+        });
 
         zone.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                return;
+            }
             intZone = newValue.getCode();
             switch (newValue.getCode()) {
                 case 1:
@@ -90,9 +172,13 @@ public class StartWindowController {
                     district.setItems(regionJFX12);
                     break;
             }
+            district.getSelectionModel().select(0);
         });
 
         district.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                return;
+            }
             intDistinct = newValue.getCode();
         });
 
@@ -100,17 +186,26 @@ public class StartWindowController {
         to.setOnAction(event -> dateTo = to.getValue());
 
         parse.setOnAction(event -> {
-            Parameter parameter = new Parameter();
+            final Parameter parameter = new Parameter();
             parameter.setFrom(dateFrom);
             parameter.setTo(dateTo);
             parameter.setDistinct(intDistinct);
             parameter.setZone(intZone);
-            Facade facade = new Facade();
-            facade.action(parameter);
+            final Facade facade = new Facade();
+            final List<IssueEntity> filterIssue = facade.action(parameter);
+            final FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel (*.xlsx)", "*.xlsx");
+            fileChooser.setTitle("Сохранить найденные проблемы");
+            fileChooser.getExtensionFilters().add(extFilter);
+            final File file = fileChooser.showSaveDialog(parse.getScene().getWindow());
+            final ExcelWriter excelWriter = new ExcelWriter(file.getAbsolutePath());
+            excelWriter.writeIssue(filterIssue);
         });
+
     }
 
     private static final ObservableList<RegionJFX> regionJFX1 = FXCollections.observableArrayList(
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
             new RegionJFX("БОГОРОДСКОЕ", 2),
             new RegionJFX("ВЕШНЯКИ", 3),
             new RegionJFX("ВОСТОЧНОЕ_ИЗМАЙЛОВО", 4),
@@ -130,6 +225,7 @@ public class StartWindowController {
     );
 
     private static final ObservableList<RegionJFX> regionJFX2 = FXCollections.observableArrayList(
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
             new RegionJFX("ВНУКОВО", 20),
             new RegionJFX("ДОРОГОМИЛОВО", 21),
             new RegionJFX("КРЫЛАТСКОЕ", 22),
@@ -146,6 +242,7 @@ public class StartWindowController {
     );
 
     private static final ObservableList<RegionJFX> regionJFX3 = FXCollections.observableArrayList(
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
             new RegionJFX("КРЮКОВО", 132),
             new RegionJFX("МАТУШКИНО", 133),
             new RegionJFX("САВЕЛКИ", 134),
@@ -154,10 +251,12 @@ public class StartWindowController {
     );
 
     private static final ObservableList<RegionJFX> regionJFX4 = FXCollections.observableArrayList(
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
             new RegionJFX("ЩЕРБИНКА", 140)
     );
 
     private static final ObservableList<RegionJFX> regionJFX5 = FXCollections.observableArrayList(
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
             new RegionJFX("АЭРОПОРТ", 34),
             new RegionJFX("БЕГОВОЙ", 35),
             new RegionJFX("БЕСКУДНИКОВСКИЙ", 36),
@@ -177,6 +276,7 @@ public class StartWindowController {
     );
 
     private static final ObservableList<RegionJFX> regionJFX6 = FXCollections.observableArrayList(
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
             new RegionJFX("АЛЕКСЕЕВСКИЙ", 51),
             new RegionJFX("АЛТУФЬЕВСКИЙ", 52),
             new RegionJFX("БАБУШКИНСКИЙ", 53),
@@ -185,33 +285,36 @@ public class StartWindowController {
             new RegionJFX("ЛИАНОЗОВО", 56),
             new RegionJFX("ЛОСИНООСТРОВСКИЙ", 57),
             new RegionJFX("МАРФИНО", 58),
-            new RegionJFX("МАРЬИНА_РОЩА", 59),
+            new RegionJFX("МАРЬИНА РОЩА", 59),
             new RegionJFX("ОСТАНКИНСКИЙ", 60),
             new RegionJFX("ОТРАДНОЕ", 61),
             new RegionJFX("РОСТОКИНО", 62),
             new RegionJFX("СВИБЛОВО", 63),
-            new RegionJFX("СЕВЕРНОЕ_МЕДВЕДКИНО", 64),
+            new RegionJFX("СЕВЕРНОЕ МЕДВЕДКИНО", 64),
             new RegionJFX("СЕВЕРНЫЙ", 65),
-            new RegionJFX("ЮЖНОЕ_МЕДВЕДКОВО", 66),
+            new RegionJFX("ЮЖНОЕ МЕДВЕДКОВО", 66),
             new RegionJFX("ЯРОСЛАВСКИЙ", 67)
     );
 
     private static final ObservableList<RegionJFX> regionJFX7 = FXCollections.observableArrayList(
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
             new RegionJFX("КУРКИНО", 69),
             new RegionJFX("МИТИНО", 70),
-            new RegionJFX("ПОКРОВСКОЕ_СТРЕШНЕВО", 71),
-            new RegionJFX("СЕВЕРНОЕ_ТУШИНО", 72),
+            new RegionJFX("ПОКРОВСКОЕ СТРЕШНЕВО", 71),
+            new RegionJFX("СЕВЕРНОЕ ТУШИНО", 72),
             new RegionJFX("СТРОГИНО", 73),
-            new RegionJFX("ХОРОШЕВО_МНЕВНИКИ", 74),
+            new RegionJFX("ХОРОШЕВО МНЕВНИКИ", 74),
             new RegionJFX("ЩУКИНО", 75),
-            new RegionJFX("ЮЖНОЕ_ТУШИНО", 76)
+            new RegionJFX("ЮЖНОЕ ТУШИНО", 76)
     );
 
     private static final ObservableList<RegionJFX> regionJFX8 = FXCollections.observableArrayList(
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
             new RegionJFX("ТРОИЦК", 141)
     );
 
     private static final ObservableList<RegionJFX> regionJFX9 = FXCollections.observableArrayList(
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
             new RegionJFX("АРБАТ", 78),
             new RegionJFX("БАСМАННЫЙ", 79),
             new RegionJFX("ЗАМОСКВОРЕЧЬЕ", 80),
@@ -225,7 +328,8 @@ public class StartWindowController {
     );
 
     private static final ObservableList<RegionJFX> regionJFX10 = FXCollections.observableArrayList(
-            new RegionJFX("ВЫХИНО_ЖУЛЕБИНО", 89),
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
+            new RegionJFX("ВЫХИНО ЖУЛЕБИНО", 89),
             new RegionJFX("КАПОТНЯ", 90),
             new RegionJFX("КУЗЬМИНКИ", 91),
             new RegionJFX("ЛЕФОРТОВО", 92),
@@ -240,6 +344,7 @@ public class StartWindowController {
     );
 
     private static final ObservableList<RegionJFX> regionJFX11 = FXCollections.observableArrayList(
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
             new RegionJFX("АКАДЕМИЧЕСКИЙ", 102),
             new RegionJFX("ГАГАРИНСКИЙ", 103),
             new RegionJFX("ЗЮЗИНО", 104),
@@ -247,31 +352,32 @@ public class StartWindowController {
             new RegionJFX("КОТЛОВКА", 106),
             new RegionJFX("ЛОМОНОСОВСКИЙ", 107),
             new RegionJFX("ОБРУЧЕВСКИЙ", 108),
-            new RegionJFX("СЕВЕРНОЕ_БУТЛОВО", 109),
-            new RegionJFX("ТЕПЛЫЙ_СТАН", 110),
+            new RegionJFX("СЕВЕРНОЕ БУТЛОВО", 109),
+            new RegionJFX("ТЕПЛЫЙ СТАН", 110),
             new RegionJFX("ЧЕРЕМУШКИ", 111),
-            new RegionJFX("ЮЖНОЕ_БУТЛОВО", 112),
+            new RegionJFX("ЮЖНОЕ БУТЛОВО", 112),
             new RegionJFX("ЯСЕНЕВО", 113)
     );
 
 
     private static final ObservableList<RegionJFX> regionJFX12 = FXCollections.observableArrayList(
-            new RegionJFX("БИРЮЛЕВО_ВОСТОЧНОЕ", 115),
-            new RegionJFX("БИРЮЛЕВО_ЗАПАДНОЕ", 116),
+            new RegionJFX("ВСЕ РАЙОНЫ", 0),
+            new RegionJFX("БИРЮЛЕВО ВОСТОЧНОЕ", 115),
+            new RegionJFX("БИРЮЛЕВО ЗАПАДНОЕ", 116),
             new RegionJFX("БРАТЕЕВО", 117),
             new RegionJFX("ДАНИЛОВСКИЙ", 118),
             new RegionJFX("ДОНСКОЙ", 119),
             new RegionJFX("ЗЯБЛИКОВО", 120),
-            new RegionJFX("МОСКВОРЕЧЬЕ_САБУРОВО", 121),
-            new RegionJFX("НАГАТИНО_САДОВНИКИ", 122),
-            new RegionJFX("НАГАТИНСКИЙ_ЗАТОН", 123),
+            new RegionJFX("МОСКВОРЕЧЬЕ САБУРОВО", 121),
+            new RegionJFX("НАГАТИНО САДОВНИКИ", 122),
+            new RegionJFX("НАГАТИНСКИЙ ЗАТОН", 123),
             new RegionJFX("НАГОРНЫЙ", 124),
-            new RegionJFX("ОРЕХОВО_БОРИСОВО_СЕВЕРНОЕ", 125),
-            new RegionJFX("ОРЕХОВО_БОРИСОВО_ЮЖНОЕ", 126),
+            new RegionJFX("ОРЕХОВО-БОРИСОВО СЕВЕРНОЕ", 125),
+            new RegionJFX("ОРЕХОВО-БОРИСОВО ЮЖНОЕ", 126),
             new RegionJFX("ЦАРИЦЫНО", 127),
-            new RegionJFX("ЧЕРТАНОВО_СЕВЕРНОЕ", 128),
-            new RegionJFX("ЧЕРТАНОВО_ЦЕНТРАЛЬНОЕ", 129),
-            new RegionJFX("ЧЕРТАНОВО_ЮЖНОЕ", 130)
+            new RegionJFX("ЧЕРТАНОВО СЕВЕРНОЕ", 128),
+            new RegionJFX("ЧЕРТАНОВО ЦЕНТРАЛЬНОЕ", 129),
+            new RegionJFX("ЧЕРТАНОВО ЮЖНОЕ", 130)
     );
 
 }
