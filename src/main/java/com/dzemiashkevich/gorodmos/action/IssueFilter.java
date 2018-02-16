@@ -13,8 +13,8 @@ public final class IssueFilter {
 
   public static List<IssueEntity> filterByTime(final List<IssueEntity> issueEntities, final LocalDate from, final LocalDate to) {
     return issueEntities.stream().filter(i ->
-      i.getDate().isAfter(from) && i.getDate().isBefore(to)
-    ).collect(Collectors.toList());
+            (i.getDate().isAfter(from) || i.getDate().isEqual(from) && (i.getDate().isBefore(to) || i.getDate().isEqual(to)))
+            ).collect(Collectors.toList());
   }
 
 }

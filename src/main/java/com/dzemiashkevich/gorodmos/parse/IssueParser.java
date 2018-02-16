@@ -18,7 +18,7 @@ public class IssueParser {
   public List<IssueEntity> parse(final String url, int from, int to) {
     List<IssueEntity> allIssueList = new ArrayList<>();
 
-    for(int i = from; i <= 3; i++) {
+    for(int i = from; i <= to; i++) {
       final String currentUrl = url + i;
 
       final List<IssueEntity> issueList = this.parsePage(currentUrl);

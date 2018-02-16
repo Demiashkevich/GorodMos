@@ -24,7 +24,7 @@ public class Facade {
     {
       put(1, new int[]{2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18});
       put(19, new int[]{20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32});
-      put(131, new int[]{136});
+      put(131, new int[]{132, 133, 134, 135, 136});
       put(138, new int[]{140});
       put(33, new int[]{34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45 ,46, 47, 48, 49});
       put(50, new int[]{51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67});
@@ -66,6 +66,8 @@ public class Facade {
           this.execute(urlParameter, allResult);
         }
         urlParameter.setDistinct(0);
+      } else {
+        this.execute(urlParameter, allResult);
       }
 
       urlParameter.setFrom(urlParameter.getFrom().plusMonths(1));
@@ -74,7 +76,7 @@ public class Facade {
 
     List<IssueEntity> issueEntities = IssueFilter.filterByTime(allResult, formParameter.getFrom(), formParameter.getTo());
 
-    ExcelWriter excelWriter = new ExcelWriter("C:\\Users\\Yahor_Dzemiashkevich\\Desktop\\GorodMos.xlsx");
+    ExcelWriter excelWriter = new ExcelWriter("C:\\Users\\Demiashkevich Egor\\Desktop\\GorodMos.xlsx");
     excelWriter.writeIssue(issueEntities);
     System.out.println();
   }
@@ -98,7 +100,7 @@ public class Facade {
 
     urlParameter.setDistinct(formParameter.getDistinct());
     urlParameter.setZone(formParameter.getZone());
-    urlParameter.setYear(formParameter.getYear());
+    urlParameter.setYear(start.getYear());
     urlParameter.setMonth(start.getMonth().getValue());
     return urlParameter;
   }

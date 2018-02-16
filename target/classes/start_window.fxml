@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="235.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dzemiashkevich.gorodmos.controller.StartWindowController">
+   <children>
+      <Accordion layoutX="98.0" layoutY="56.0" />
+      <DatePicker fx:id="to" layoutX="379.0" layoutY="25.0" />
+      <DatePicker fx:id="from" layoutX="167.0" layoutY="25.0" />
+      <ChoiceBox fx:id="zone" layoutX="21.0" layoutY="83.0" prefHeight="25.0" prefWidth="534.0" />
+      <ChoiceBox fx:id="district" layoutX="21.0" layoutY="129.0" prefHeight="25.0" prefWidth="534.0" />
+      <Label layoutX="25.0" layoutY="27.0" text="Выберите дату:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="146.0" layoutY="28.0" text="от">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="357.0" layoutY="28.0" text="до">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="parse" layoutX="221.0" layoutY="179.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="134.0" text="Выполнить" />
+   </children>
+</AnchorPane>
