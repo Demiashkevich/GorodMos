@@ -43,6 +43,7 @@ public class StartWindowController {
     private LocalDate dateTo;
     private int intZone;
     private int intDistinct;
+    private int intIssueCode;
 
     public void initialize() {
         Callback<DatePicker, DateCell> dayCellFactoryFrom = dp -> new DateCell()
@@ -126,7 +127,7 @@ public class StartWindowController {
             if (newValue == null) {
                 return;
             }
-            intDistinct = newValue.getCode();
+            intIssueCode = newValue.getCode();
         });
 
         zone.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -186,11 +187,25 @@ public class StartWindowController {
         to.setOnAction(event -> dateTo = to.getValue());
 
         parse.setOnAction(event -> {
+            if (from.getValue() == null && to.getValue() == null) {
+                from.setStyle("-fx-border-color: red;");
+                to.setStyle("-fx-border-color: red;");
+                return;
+            }
+            if (from.getValue() == null) {
+                from.setStyle("-fx-border-color: red;");
+                return;
+            }
+            if (to.getValue() == null) {
+                to.setStyle("-fx-border-color: red;");
+                return;
+            }
             final Parameter parameter = new Parameter();
             parameter.setFrom(dateFrom);
             parameter.setTo(dateTo);
             parameter.setDistinct(intDistinct);
             parameter.setZone(intZone);
+            parameter.setIssueCode(intIssueCode);
             final Facade facade = new Facade();
             final List<IssueEntity> filterIssue = facade.action(parameter);
             final FileChooser fileChooser = new FileChooser();
